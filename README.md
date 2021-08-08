@@ -8,7 +8,7 @@ You may also find this tutorial useful if you would like to learn how Avalanche 
 
 We have included a complete ansible scripts to create a development server using vultr vps , and you can find the entire project [here](https://github.com/tamilzh/ansible-chainlink-avalanche-setup.git). Many steps are involved, but once you understand how they fit together, you will have a deeper understanding of how this work.
 ## Audience
-To get the most out of this tutorial, you will need to have a basic understanding of Docker, Chainlink, Javascript, Node, Solidity, and how to write Smartcontracts. If you do not yet know about these topics, see the **Resources** section at the end for links to learn more.
+To get the most out of this tutorial, you will need to have a basic understanding of Docker, Chainlink, Javascript, Node, Solidity, and how to write Smartcontracts. If you do not yet know about these topics, see the [**Resources**](#resources) section at the end for links to learn more.
 
 
 ## Overview
