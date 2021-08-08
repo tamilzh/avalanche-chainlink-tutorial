@@ -2,7 +2,6 @@
 
 This tutorial will show you how to setup Chainlink node with Avalanche Fuji Testnet and create a smart contracts connect to the chainlink node.
 
-\
 We at [red·dev](https://www.red.dev) needed to do this for our current software project under development, [RediYeti](https://www.rediyeti.com). We have a use-case where we need to verify ownership of an Avalanche X-Chain address before the dApp sends funds related to this address. To prevent fraud, the verification must take place inside the dApp.
 You may also find this tutorial useful if you would like to learn how Avalanche signatures work and how cryptography is implemented on the X-Chain and on the C-Chain. 
 
@@ -24,9 +23,10 @@ At the very highest level, here is an overview of the process we will go through
 5. Metamask wallet with Avalanche Fuji Testnet
 
 ## Install Docker Container
-#
+
 The first step is to install Docker-CE. Docker-CE (community edition) is a free version of Docker that you can use to spin up containers without having to pay for enterprise-level support
 
+Open a terminal session and execute the below command,
 ```bash
 $ curl -sSL https://get.docker.com/ | sh
 ```
@@ -42,7 +42,7 @@ $ docker -v
 The next step is to download and install the Go Lang which is required for building the AvalancheGo later in this section
 
 ## Install Go Lang
-#
+
 Download the Go Lang package. We have used the version 1.16.6 for this tutorial
 ```
 $ wget https://storage.googleapis.com/golang/go1.16.6.linux-amd64.tar.gz
@@ -65,7 +65,7 @@ $ go version
 
 
 ## Build AvalancheGo image
-#
+
 Clone the AvalancheGo repository
 
 ```
