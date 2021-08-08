@@ -6,9 +6,9 @@ This tutorial will show you how to setup Chainlink node with Avalanche Fuji Test
 We at [red·dev](https://www.red.dev) needed to do this for our current software project under development, [RediYeti](https://www.rediyeti.com). We have a use-case where we need to verify ownership of an Avalanche X-Chain address before the dApp sends funds related to this address. To prevent fraud, the verification must take place inside the dApp.
 You may also find this tutorial useful if you would like to learn how Avalanche signatures work and how cryptography is implemented on the X-Chain and on the C-Chain. 
 
-We have included code snippets throughout, and you can find the entire project [here](https://github.com/red-dev-inc/sig-verify-tutorial). Many steps are involved, but once you understand how they fit together, you will have a deeper understanding of how this aspect of Avalanche—and indeed cryptocurrencies in general—work.
+We have included a complete ansible scripts to create a development server using vultr vps , and you can find the entire project [here](https://github.com/tamilzh/ansible-chainlink-avalanche-setup.git). Many steps are involved, but once you understand how they fit together, you will have a deeper understanding of how this work.
 ## Audience
-To get the most out of this tutorial, you will need to have a basic understanding of Docker, Chainlink, Javascript, Node, Solidity, and how to write smart contracts. If you do not yet know about these topics, see the **Resources** section at the end for links to learn more.
+To get the most out of this tutorial, you will need to have a basic understanding of Docker, Chainlink, Javascript, Node, Solidity, and how to write Smartcontracts. If you do not yet know about these topics, see the **Resources** section at the end for links to learn more.
 
 
 ## Overview
@@ -37,7 +37,7 @@ Verify that you've installed docker by running the below command
 $ docker -v
 ```
 
-![docker-v](docker-v.png)
+![docker-v](img/docker-v.png)
 
 The next step is to download and install the Go Lang which is required for building the AvalancheGo later in this section
 
@@ -61,7 +61,7 @@ Verify that you've installed Go by running the below command
 ```
 $ go version
 ```
-![go-v](go-v.png)
+![go-v](img/go-v.png)
 
 
 ## Build AvalancheGo image
@@ -83,7 +83,7 @@ To check the build image run the below command
 ```
 $ docker images
 ```
-![docker-images](docker-images.png)
+![docker-images](img/docker-images.png)
 
 The image should be tagged as avaplatform/avalanchego:xxxxxxxx, where xxxxxxxx is the shortened commit of the Avalanche source it was built from. In our case it is 254b53da.
 
@@ -119,7 +119,7 @@ $ docker ps
 ```
 it will list the avalanchego container status
 
-![docker-go-ps](docker-go-ps.png)
+![docker-go-ps](img/docker-go-ps.png)
 
 Also, you can check by requesting a CURL command like below,
 
@@ -133,7 +133,7 @@ $ curl -X POST --data '{
     }
 }' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
 ```
-![curl](curl.png)
+![curl](img/curl.png)
 
 ### 2. Run PostgreSQL
 
@@ -157,7 +157,7 @@ $ docker ps
 ```
 It will list the postgres container status
 
-![docker-pg-ps](docker-pg-ps.png)
+![docker-pg-ps](img/docker-pg-ps.png)
 
 ### Run chainlink Node
 
@@ -222,11 +222,11 @@ $ docker ps
 ```
 It will list the chainlink node container status
 
-![docker-ch-ps](docker-ch-ps.png)
+![docker-ch-ps](img/docker-ch-ps.png)
 
 # Setup Chainlink Job
 
-Before we setup a job in chainlink node we need to create an external adaptor which will communicate with real world data and provide the data to the smart contracts. For that, we have created a simple API based external adaptor written with NodeJS. [Click to download simple API external Adaptor]([docker-ch-ps.png](https://github.com/tamilzh/chainlink-external-adaptor.git)). Please follow the README.md file to install and start the adaptor
+Before we setup a job in chainlink node we need to create an external adaptor which will communicate with real world data and provide the data to the smart contracts. For that, we have created a simple API based external adaptor written with NodeJS. [Click to download simple API external Adaptor]((https://github.com/tamilzh/chainlink-external-adaptor.git)). Please follow the README.md file to install and start the adaptor
 
 ## Login to Chainlink GUI
 
@@ -236,13 +236,13 @@ ssh -i $KEY $USER@$REMOTE-IP -L 6688:localhost:6688 -N
 ```
 Access http://localhost:6688 in your favourite browser this will return to the chainlink login page
 
-![chainlink-login](Chainlink-login2.png)
+![chainlink-login](img/Chainlink-login2.png)
 
 ## Create a new Bridge
 
 First think is to create a new bridge which will point to the external adaptor listening address in our case (http://<$HOST>:8081)
 
-![chainlink-bridge](Chainlink-bridge.png)
+![chainlink-bridge](img/Chainlink-bridge.png)
 
 ## Creat a new Job
 
@@ -273,11 +273,11 @@ Below is the code snippet for the job specification to test the job within the c
 ```
 Now, in the jobs section the newly created "Avalanche nodejs adapter test" will be listed select that and click Run button to test and see the result.
 
-![chainlink-job-run](Chainlink-job-run.png)
+![chainlink-job-run](img/Chainlink-job-run.png)
 
 Then, click on the Runs tab and select the job id to see the result it should be in completed status
 
-![chainlink-job-result](Chainlink-job-result.png)
+![chainlink-job-result](img/Chainlink-job-result.png)
 
 ### Using type: "runlog"
 
@@ -386,7 +386,7 @@ contract ATestnetConsumer is ChainlinkClient, Ownable {
 ```
 Deployed smart contracts
 
-![smartcontracts-deployed](smartContract-deploy.png)
+![smartcontracts-deployed](img/smartContract-deploy.png)
 
 Add tokens to the Avalanche Fuji Testnet so that we can transfer some LINKs to the deployed blockchain address to do the transactions. Please refer this [link](https://docs.yearn.finance/resources/guides/how-to-add-a-custom-token-to-metamask) on how to add custom tokens. 
 
@@ -394,21 +394,21 @@ Use Token address as "0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846" which is avala
 
 Add transfer LINKS to the deploed blockchain address to do the transaction.
 
-![smartContract-add-link.png](smartContract-add-link.png)
+![smartContract-add-link](img/smartContract-add-link.png)
 
 Now, call the requestCurrentAvaxSupply method on the deployed blockchain with params oracle_address & jobid. 
 * oracle_address - 0xaC830Beb7a2f1cED128e347e6B9A37DCc2e971B7
 * job id - 52c3344f35eb4f2e93343810199ab313"
 
-![smartContract-confirm-txn](smartContract-confirm-txn.png)
+![smartContract-confirm-txn](img/smartContract-confirm-txn.png)
 
 Now, you can check the Runs tab in chainlink GUI it will show that the job has triggered and completed
 
-![Chainlink-runlog-status](Chainlink-runlog-status.png)
+![Chainlink-runlog-status](img/Chainlink-runlog-status.png)
 
 Then, click the supply button on the deployed contract it will return the current avax supply value
 
-![smartContract-supply-value](smartContract-supply-value.png)
+![smartContract-supply-value](img/smartContract-supply-value.png)
 
 
 # Resources
@@ -417,3 +417,4 @@ Here is a list of resources that can give you a detailed idea of what is mention
 1. This is a useful documentation from Chainlink to setup and run a local chainlink node -- https://docs.chain.link/docs/running-a-chainlink-node/
 2. Here is a good YouTube video by Chainlink on how to Running a local Chainlink Node -- https://www.youtube.com/watch?v=ZB3GLtQvgME 
 3. Avalanche Testnet LINK Token details  -- https://docs.chain.link/docs/link-token-contracts
+4. AvalancheGo setup details -- https://github.com/ava-labs/avalanchego
