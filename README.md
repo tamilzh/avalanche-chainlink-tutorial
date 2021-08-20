@@ -319,7 +319,7 @@ Code snippet for type: "runlog"
 ```
 
 * jsonparse, ethuint256 & ethtx are core adaptors are executed synchronously. For more details check the usage of each adaptors [here](https://docs.chain.link/docs/core-adapters/)
-* runlog - By adding the address parameter, you make the event filter of the RunLog initiator more restrictive, only listening for events from that address, instead of any address. By adding the requesters parameter, you only allow requests to come from an address within the array. Please have a look at this [video](https://www.youtube.com/watch?v=ZB3GLtQvgME&38m38s) to get your address
+* runlog - By adding the address parameter, you make the event filter of the RunLog initiator more restrictive, only listening for events from that address, instead of any address. By adding the requesters parameter, you only allow requests to come from an address within the array. Please have a look at this [video](https://www.youtube.com/watch?v=ZB3GLtQvgME&38m38s) to get your oracle address
 
 
 # Smart contracts
@@ -390,13 +390,21 @@ Deployed smart contracts
 
 Add tokens to the Avalanche Fuji Testnet so that we can transfer some LINKs to the deployed blockchain address to do the transactions. Please refer this [link](https://docs.yearn.finance/resources/guides/how-to-add-a-custom-token-to-metamask) on how to add custom tokens. 
 
-Use Token address as "0x0b9d5D9136855f6FEc3c0993feE6E9CE8a297846" which is avalanche testnet Token. It will be preloaded with balance of 30 Tokens.
+Use Avalanche Faucet (https://linkfaucet.protofire.io/fuji) and send some token to the Fuji Testnet wallet addresss.
 
-Add transfer LINKS to the deploed blockchain address to do the transaction.
+Add transfer LINKS to the deployed blockchain address to do the transaction.
 
 ![smartContract-add-link](img/smartContract-add-link.png)
 
 Now, call the requestCurrentAvaxSupply method on the deployed blockchain with params oracle_address & jobid. 
+
+---
+**NOTE**
+
+The oracle address should be your own oracle address. Please have a look at this [video](https://www.youtube.com/watch?v=ZB3GLtQvgME&38m38s) to get your own oracle address.
+
+---
+
 * oracle_address - 0xaC830Beb7a2f1cED128e347e6B9A37DCc2e971B7
 * job id - 52c3344f35eb4f2e93343810199ab313"
 
