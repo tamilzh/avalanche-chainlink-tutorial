@@ -30,7 +30,11 @@ The first step is to install Docker-CE. Docker-CE (community edition) is a free 
 ```bash
 $ curl -sSL https://get.docker.com/ | sh
 ```
-
+Manage Docker as a non-root user, create a docker group and add your user to it.
+```bash
+$ sudo groupadd docker
+$ sudo usermod -aG docker $USER
+```
 Verify that you've installed docker by running the below command
 
 ```
