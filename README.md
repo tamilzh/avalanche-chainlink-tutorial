@@ -230,7 +230,7 @@ It will list the chainlink node container status
 
 # Setup Chainlink Job
 
-Before we setup a job in chainlink node we need to create an external adaptor which will communicate with real world data and provide the data to the smart contracts. For that, we have created a simple API based external adaptor written with NodeJS. [Click to download simple API external Adaptor]((https://github.com/tamilzh/chainlink-external-adaptor.git)). Please follow the README.md file to install and start the adaptor
+Before we setup a job in chainlink node we need to create an external adaptor which will communicate with real world data and provide the data to the smart contracts. For that, we have created a simple API based external adaptor written with NodeJS. [Click to download simple API external Adaptor]((chainlink-external-adaptor)). Please follow the README.md file to install and start the adaptor
 
 ## Login to Chainlink GUI
 
